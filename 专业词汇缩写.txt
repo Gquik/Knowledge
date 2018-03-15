@@ -1,0 +1,3 @@
+POJO (Plain Ordinary Java Object) 简单的Java对象,实际就是普通JavaBeans
+EJB (Enterprise Java Beans) )称为Java 企业Bean，是Java的核心代码，分别是会话Session Bean，实体Entity Bean和消息驱动MessageDriven Bean。
+ORM (O/R mapping) (Object/Relational Mapping)对象关系映射

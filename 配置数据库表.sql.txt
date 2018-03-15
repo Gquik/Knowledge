@@ -1,0 +1,63 @@
+drop table if exists tbl_custmoter;
+create table tbl_custmoter
+(
+	uuid               int not null auto_increment,
+	customerId         varchar(20),
+	pwd                varchar(20),
+	showName           varchar(100),
+	trueName           varchar(100),
+	registerTime       varchar(100),
+	primary key (uuid)
+) charset =utf8 ENGINE=InnoDB;
+
+drop table if exists tbl_goods;
+create table tbl_goods
+(
+	uuid               int not null auto_increment,
+	name               varchar(200),
+	imgpath            varchar(500),
+	description        varchar(2000),
+	primary key (uuid)
+) charset =utf8 ENGINE=InnoDB;
+
+drop table if exists tbl_cart;
+create table tbl_cart
+(
+	uuid               int not null auto_increment,
+	customerUuid       int,
+	goodsUuid          int,
+	buyNum             int,
+	primary key (uuid)
+) charset =utf8 ENGINE=InnoDB;
+
+drop table if exists tbl_order;
+create table tbl_order
+(
+	uuid               int not null auto_increment,
+	customerUuid       int,
+	orderTime          varchar(100),
+	totalMoney         float,
+	saveMoney          smallint,
+	primary key (uuid)
+) charset =utf8 ENGINE=InnoDB;
+
+drop table if exists tbl_orderDetall;
+create table tbl_orderDetall
+(
+	uuid               int not null auto_increment,
+	orderUuid          int,
+	orderNum           int,
+	price              float,
+	money              float,
+	saveMoney          float,
+	primary key (uuid)
+) charset =utf8 ENGINE=InnoDB;
+
+drop table if exists tbl_store;
+create table tbl_store
+(
+	uuid               int not null auto_increment,
+	goodsUuid          int,
+	storeNum           int,
+	primary key (uuid)
+) charset =utf8 ENGINE=InnoDB;
