@@ -1,9 +1,8 @@
-1定义的常量如果为“成员变量”，则必须在定义时就给它赋初始值，否则编译时会报错。
-2stringbuffer和stringbuider的区别————线程安全方面stringbuffer更安全
-3linux常用的一些操作命令 打tar包命令(tar -cf)、查看进程命令(ps -ef|grep)
-4string注解相关
-5jQurey相关 document().ready()
-6Mybatis相关
+定义的常量如果为“成员变量”，则必须在定义时就给它赋初始值，否则编译时会报错。
+stringbuffer和stringbuider的区别————线程安全方面stringbuffer更安全
+linux常用的一些操作命令 打tar包命令(tar -cvf /-xvf)、查看进程命令(ps -ef|grep)
+string注解相关 @Component  @Controller  @ Service  @ Repository
+jQurey相关 document().ready()******************************************
 jetty和tomcat都是servlet容器，用于启动web项目
 数据库语句中，auto_increment--自增
 Spring注解形式：@Repository、@Service、@Controller，它们分别对应存储层Bean，业务层Bean，和展示层Bean
@@ -11,3 +10,4 @@ maven 自动识别包与包的兼容性
 面向对象编程：我的理解是，我们new一个对象，然后对它的属性和行为的操作就是面向对象编程。我们通过了解对象有哪些属性和行为，解决生活中的一些实际问题的编程思想。
 Mybatis:一个DAO一个映射文件Mapper,实现与数据库的交互。封装一些sql语句。
 Mybatis:一款优秀的持久层框架,支持定制化 SQL,简单的 XML 或注解来配置和映射原生信息,POJO普通的 Java对象映射成数据库中的记录
+MVC:模型-视图-控制器，一种将业务逻辑、数据和界面显示分离开的框架（也是一种比较流行设计模式）
