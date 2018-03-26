@@ -2,7 +2,9 @@
 stringbuffer和stringbuider的区别————线程安全方面stringbuffer更安全
 linux常用的一些操作命令 打tar包命令(tar -cvf /-xvf)、查看进程命令(ps -ef|grep)
 string注解相关 @Component  @Controller  @ Service  @ Repository
-jQurey相关 document().ready()******************************************
+jQurey相关 document().ready()读取文档，跨浏览器  $() 函数用于将任何对象包裹成 jQuery 对象
+jQuery 支持不同类型的选择器，例如 ID 选择器$('#ID')、class 选择器$('.class')、标签选择器$("div")
+jQuery单击事件隐藏一张图片 $('#ButtonToClick').click(function(){ $('#ImageToHide').hide();});
 jetty和tomcat都是servlet容器，用于启动web项目
 数据库语句中，auto_increment--自增
 Spring注解形式：@Repository、@Service、@Controller，它们分别对应存储层Bean，业务层Bean，和展示层Bean
@@ -11,3 +13,6 @@ maven 自动识别包与包的兼容性
 Mybatis:一个DAO一个映射文件Mapper,实现与数据库的交互。封装一些sql语句。
 Mybatis:一款优秀的持久层框架,支持定制化 SQL,简单的 XML 或注解来配置和映射原生信息,POJO普通的 Java对象映射成数据库中的记录
 MVC:模型-视图-控制器，一种将业务逻辑、数据和界面显示分离开的框架（也是一种比较流行设计模式）
+SpringBoot:是一个开源框架，它可用于创建可执行的Spring应用程序，采用了习惯优于配置的方法。
+SpringBoot:@RestController(@Controller+@RequestBody) @RequestMapping @SpringBootApplication
+SpringBoot:加springloader插件热部署、加springboot devtools依赖包和插件热部署（更好）
