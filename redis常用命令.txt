@@ -1,0 +1,12 @@
+string类型：
+#set str1 12345  添加一个值
+#get str1	 获取一个值
+#incr str1 将str1设置成主键+1
+#decr str1 将str1设置成主键-1
+hash类型：
+#hset hash1 field1 abc   向hash1的field1里面设置一个值abc
+#hget hash1 field1    获取hash1的field1里面的值
+
+#ttl str1 查询key的有效期 (-1为永久保存,-2为不存在。正数为有效期倒计时)
+#expire str1 100 (将str1的有效期设置成100秒)
+#keys *   查看当前数据库的所有key

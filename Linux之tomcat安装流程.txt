@@ -1,0 +1,8 @@
+准备toncat安装包apache-tomcat-7.0.47.tar.gz
+安装步骤：
+1、将apache-tomcat-7.0.47.tar.gz 上传到root目录，其他目录应该也行
+2、解压缩apache-tomcat-7.0.47.tar.gz 
+#tar zxf apache-tomcat-7.0.47.tar.gz 
+3、进入apache-tomcat-7.0.47目录启动tomcat
+#cd apache-tomcat-7.0.47
+#bin/startup.sh

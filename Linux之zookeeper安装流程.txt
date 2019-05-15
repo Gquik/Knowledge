@@ -1,0 +1,22 @@
+准备zookeeper文件：zookeeper-3.4.6.tar.gz
+ 需要安装jdk
+安装步骤：
+1、将zookeeper-3.4.6.tar.gz上传到root目录,或者别的目录也可以
+2、解压缩zookeeper-3.4.6.tar.gz
+#tar zxf zookeeper-3.4.6.tar.gz
+3、进入 zookeeper-3.4.6目录，创建data目录
+#cd zookeeper-3.4.6
+#mkdir data
+4、进入zookeeper-3.4.6目录下的conf目录,将conf文件夹下zoo_sample.cfg复制一份，改名为zoo.cfg
+#cd conf
+#mv zoo_sample.cfg zoo.cfg
+5、修改zoo.cfg配置dataDir属性，指定一个真实目录（就是我们创建的data目录）
+#vi zoo.cfg
+dataDir=/root/zookeeper-3.4.6/data
+6、进入zookeeper-3.4.6目录下的bin目录
+	启动zookeeper：                                          （注意要关闭linux的防火墙。）
+#./zkServer.sh start     
+	关闭zookeeper：
+#./zkServer.sh stop
+	查看zookeeper状态：
+#./zkServer.sh status

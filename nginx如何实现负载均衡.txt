@@ -1,0 +1,15 @@
+修改nginx.conf配置文件
+如果一个服务由多条服务器提供，需要把负载分配到不同的服务器处理，需要负载均衡。
+可以根据服务器的实际情况调整服务器权重。权重weight越高分配的请求越多，权重越低，请求越少。默认是都是1,不写就是weight=1
+ upstream tomcat {
+	server 192.168.25.134:8080;
+	server 192.168.25.134:8081 weight=2;
+    }
+    server {
+        listen       80;
+        server_name  www.gquik.com;
+        location / {
+            proxy_pass   http://tomcat;
+            index  index.html index.htm;
+        }
+    }

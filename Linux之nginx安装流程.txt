@@ -1,0 +1,39 @@
+准备Nginx安装包nginx-1.8.0.tar.gz
+准备gcc环境
+gcc:yum install gcc-c++
+准备第三方开发包
+PCRE：yum install -y pcre pcre-devel
+zlib：   yum install -y zlib zlib-devel
+OpenSSL：yum install -y openssl openssl-devel
+1、把nginx的源码包上传到linux系统，解压缩
+#tar zxf nginx-1.8.0.tar.gz
+2、进nginx目录，使用configure命令创建一makeFile文件。
+#cd  nginx-1.8.0
+#./configure \
+--prefix=/usr/local/nginx \
+--pid-path=/var/run/nginx/nginx.pid \
+--lock-path=/var/lock/nginx.lock \
+--error-log-path=/var/log/nginx/error.log \
+--http-log-path=/var/log/nginx/access.log \
+--with-http_gzip_static_module \
+--http-client-body-temp-path=/var/temp/nginx/client \
+--http-proxy-temp-path=/var/temp/nginx/proxy \
+--http-fastcgi-temp-path=/var/temp/nginx/fastcgi \
+--http-uwsgi-temp-path=/var/temp/nginx/uwsgi \
+--http-scgi-temp-path=/var/temp/nginx/scgi
+3、有了makefile文件后就可以编译了 
+#make
+4、编译完成后安装
+#make install
+5、进入安装目录下的sbin/目录启动nginx（如果没创建/var/temp/nginx,需要手动创建）
+(#mkdir /var/temp/nginx  -p)
+#cd /usr/local/nginx/sbin
+#./nginx
+6、关闭nginx
+#./nginx -s stop
+#./nginx -s quit(推荐)
+7、刷新配置文件，热部署
+#./nginx -s reload
+
+
+配置文件在/usr/local/nginx/conf/nginx.conf

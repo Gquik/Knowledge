@@ -1,0 +1,31 @@
+修改nginx.conf配置文件
+1、安装两个tomcat，分别运行在8080和8081端口
+2、启动两个tomcat
+3、反向代理服务器的配置,复制一个server节点,将root改成proxy_pass,配置upstream
+upstream tomcat1 {
+	server 192.168.25.134:8080;
+    }
+upstream tomcat2 {
+	server 192.168.25.134:8081;
+    }
+ server {
+        listen       80;
+        server_name  www.gquik2.com;
+        location / {
+            proxy_pass   http://tomcat1;
+            index  index.html index.htm;
+        }
+ server {
+        listen       80;
+        server_name  www.gquik2.com;
+        location / {
+            proxy_pass   http://tomcat1;
+            index  index.html index.htm;
+        }
+
+4、nginx重新加载配置文件
+#./nginx -s reload
+
+5、配置域名,在hosts文件中添加域名和ip的映射关系
+192.168.25.134 www.gquik1.com
+192.168.25.134 www.gquik2.com

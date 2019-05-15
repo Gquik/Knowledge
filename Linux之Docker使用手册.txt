@@ -1,0 +1,13 @@
+删除容器：docker rm -f {镜像名字或ID}
+启动容器：	
+docker run -dti -p 9091:9091 --name test -v /data/test:/www/htdocs sxw-system:v1.1
+    ## --name test ##test是容器的名字，可以自定义
+    ## -p 端口映射
+    ## -v 挂载目录 /data/test  #jar包存放的目录
+
+进入容器：docker exec -it test sh  #####test是容器的名字
+进入容器后：apk -U update && apk -U upgrade && apk --update --no-cache add openjdk8-jre openrc
+             ##初始化java环境
+进入到jar包所在目录： cd /www/htdocs
+启动java应用：start-stop-daemon --start --exec /usr/bin/java -- -jar activity-opapi-1.0-SNAPSHOT.jar &
+退出容器：exit

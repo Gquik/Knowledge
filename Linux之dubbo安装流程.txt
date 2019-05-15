@@ -1,0 +1,19 @@
+准备dubbo的war包:dubbo-admin-2.5.4.war
+需要先安装jdk和tomcat
+最好和zookeeper在同一虚拟机（无需配置文件）
+安装步骤：
+1、将dubbo-admin-2.5.4.war安装到root目录下
+2、将war包拷贝到tomcat下面的webapps目录下(顺便可以改下名dubbo-admin.war)
+#cp dubbo-admin-2.5.4.war apache-tomcat-7.0.47/webapps/dubbo-admin.war
+3、启动tomcat
+#bin/startup.sh
+4、访问192.168.25.128：8080/dubbo-admin 账号密码都是root
+
+
+附：如果dubbo和zookeeper不在同一虚拟机，需要改配置文件。
+1、进入apache-tomcat-7.0.47/webapps/dubbo-admin/WEB-INF 修改dubbo.properties
+#cd apache-tomcat-7.0.47/webapps/dubbo-admin/WEB-INF
+#vi dubbo.properties
+将dubbo.registry.address=zookeeper://127.0.0.1:2181 的IP地址改成zookeeper所在的IP
+
+这个文件也可以改登陆的密码

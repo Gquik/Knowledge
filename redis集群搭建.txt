@@ -1,0 +1,70 @@
+需要关闭防火墙
+准备redis集群文件：redis-3.0.0.gem
+1、先关闭redis实例
+#shutdown
+#quit
+2、进入/usr/local/目录，创建一个集群目录redis-cluster
+#mkdir redis-cluster
+3、把redis目录下的bin目录复制到redis-cluster目录下，更名为redis01
+#cp -r redis/bin/ redis-cluster/redis01
+4、进入这个redis01目录,删除dump.rdb(节点信息)
+#cd  redis-cluster/redis01
+#rm -rf dump.rdb
+5、修改redis.conf文件的端口号port (不在同一台虚拟机可以不用改，用默认的6379)  和集群模式cluster-enabled
+#vi redis.conf
+修改端口port 为7001
+将cluster-enabled yes 打开
+6、复制redis01节点为redis02,redis03,redis04,redis05,redis06
+#cp -r redis01/ redis02
+#cp -r redis01/ redis03
+#cp -r redis01/ redis04
+#cp -r redis01/ redis05
+#cp -r redis01/ redis06
+7、修改redis.conf的端口号为7002,7003,7004,7005,7006
+#vi redis02/redis.conf
+#vi redis03/redis.conf
+#vi redis04/redis.conf
+#vi redis05/redis.conf
+#vi redis06/redis.conf
+8、启动每个redis实例（这里我们创建一个批处理文件 start-all.sh，启动所有redis）
+#vim start-all.sh
+新增：
+cd redis01
+./redis-server redis.conf
+cd ..
+cd redis02
+./redis-server redis.conf
+cd ..
+cd redis03
+./redis-server redis.conf
+cd ..
+cd redis04
+./redis-server redis.conf
+cd ..
+cd redis05
+./redis-server redis.conf
+cd ..
+cd redis06
+./redis-server redis.conf
+cd ..
+#wq
+9、将 start-all.sh设置权限为可执行
+#chmod +x start-all.sh
+10、执行 start-all.sh
+#./start-all.sh
+
+11、redis实例全启动后用ruby脚本搭建集群，需要ruby的运行环境
+安装ruby
+#yum install ruby
+#yum install rubygems
+12、将redis-3.0.0.gem上传到root目录，其他目录也可以
+13、安装redis-3.0.0.gem
+#gem install redis-3.0.0.gem
+14、将redis.3.0.0/src/目录下的redis-trib.rb复制到/usr/local/redis-cluster
+#cp *.rb /usr/local/redis-cluster/
+15、进入redis-cluster目录运行该脚本
+#cd redis-cluster/
+#./redis-trib.rb create --replicas 1 192.168.25.128:6379 192.168.25.134:6379 192.168.25.131:6379 192.168.25.130:6379 192.168.25.132:6379 192.168.25.133:6379
+(如果报错解决：https://blog.csdn.net/qiushisoftware/article/details/78837855）
+16、用redis01目录下的redis-cli连接集群
+# redis01/redis-cli (-p 7006) -c

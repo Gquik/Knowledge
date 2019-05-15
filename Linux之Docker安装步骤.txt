@@ -1,0 +1,15 @@
+https://www.cnblogs.com/linjiqin/p/7783108.html
+CentOS 7 中 Docker 的安装
+Docker 软件包已经包括在默认的 CentOS-Extras 软件源里。因此想要安装 docker，只需要运行下面的 yum 命令：
+
+[root@localhost?~]#?yum install docker
+启动 Docker 服务
+安装完成后，使用下面的命令来启动 docker 服务，并将其设置为开机启动：
+
+[root@localhost?~]#?service docker start
+[root@localhost?~]#?chkconfig docker on
+（LCTT 译注：此处采用了旧式的 sysv 语法，如采用CentOS 7中支持的新式 systemd 语法，如下：
+
+[root@localhost?~]#?systemctl start docker.service
+[root@localhost?~]#?systemctl enable docker.service
+）

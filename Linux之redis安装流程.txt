@@ -1,0 +1,30 @@
+1、准备redis安装包：redis-3.0.0.tar.gz
+2、新建虚拟机
+3、Redis是c语言开发的。安装redis需要c语言的编译环境。如果没有gcc需要在线安装。
+#yum install gcc-c++
+
+安装步骤：
+1、将redis-3.0.0.tar.gz上传到root目录，其他目录也可以
+2、解压redis-3.0.0.tar.gz
+#tar zxf redis-3.0.0.tar.gz
+3、进入redis-3.0.0目录，编译(必须要有makefile文件)
+#cd redis-3.0.0
+#make
+4、编译完成后进行安装(需要指定安装目录)
+#make install PREFIX=/usr/local/redis
+5、进入安装目录的bin目录，前端启动redis（不建议）
+#cd /usr/local/redis/bin
+#./redis-server (前端启动，会占用终端，不建议）
+6将/root/redis-3.0.0/下的配置文件redis.conf复制到当前目录
+#cp ~/redis-3.0.0/redis.conf .
+7编辑下redis.conf
+将deamonize no改成yes   (是否在后台运行)
+8、后端启动redis（建议）
+#./redis-server redis.conf
+9、查看进程是否启动成功
+#ps aux|grep redis
+10、客户端连接启动的redis
+#./redis-cli（连接本地）
+#./redis-cli -h 192.168.25.xxx （-p 6379)  (连接别的redis)
+11、测试有没有连通
+#ping

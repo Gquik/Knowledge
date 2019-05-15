@@ -1,0 +1,65 @@
+https://www.linuxidc.com/Linux/2017-12/149614.htm
+1.在/usr/local/目录下创建mysql目录并进入
+#mkdir /usr/local/mysql
+#cd /usr/local/mysql
+
+2.使用wget下载官方yum源的rpm包：
+#wget https://dev.mysql.com/get/mysql57-community-release-el7-11.noarch.rpm
+
+3.安装rpm包：
+#rpm -ivh mysql57-community-release-el7-11.noarch.rpm
+
+4.再次使用yum来安装mysql-server:
+#yum install -y mysql-server
+
+5.安装完成后，启动mysqld服务：
+#systemctl start mysqld
+	查看是否成功启动：
+			ps aux|grep mysqld
+
+6.设置mysqld服务开机自启动：
+#systemctl enable mysqld
+
+7.使用初始密码登录
+由于MySQL从5.7开始不允许首次安装后，使用空密码进行登录，系统会随机生成一个密码以供管理员首次登录使用，这个密码记录在/var/log/mysqld.log文件中，使用下面的命令可以查看此密码：
+#cat /var/log/mysqld.log|grep 'A temporary password'
+2017-11-12T13:35:37.013617Z 1 [Note] A temporary password is generated for root@localhost: bkv,dy,)o7Ss
+
+最后一行冒号后面的部分bkv,dy,)o7Ss就是初始密码。 
+使用此密码登录MySQL:
+#mysql -u root -p
+
+8.更改默认密码：
+  切换数据库：
+sql>use mysql;
+  修改root密码：
+sql>alter user 'root'@'localhost' identified by 'your_password';
+（将your_password替换成你自己的密码就可以了，当然，这个密码是强密码，要求密码包含大小写字母、数字及标点符号，长度应该在6位以上。）
+重新使用新的密码登录，如果可以正常登录说明你的MySQL已经成功安装在CentOS 7.4上了
+
+
+问题：
+1.mysql未设置用户远程访问
+
+解决（登录mysql执行）：
+
+默认情况下mysql为安全起见，不支持远程登录mysql，所以需要设置开启	远程登录mysql的权限
+登录mysql后输入如下命令：
+grant all privileges on *.* to 'root' @'%' identified by 'password';
+
+flush privileges;
+
+'all privileges ':所有权限 也可以写成 select ,update等。
+*.* 所有库的所有表 如 databasename.*。
+IP ?数据库所在的IP。
+identified by ‘密码’ 表示通过密码连接
+
+2.端口防火墙未开放
+
+解决（linux下执行）：
+
+/sbin/iptables -I INPUT -p tcp --dport 3306 -j ACCEPT
+
+/etc/rc.d/init.d/iptables save ---将修改永久保存到防火墙中
+
+

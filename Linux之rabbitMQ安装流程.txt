@@ -1,0 +1,68 @@
+https://blog.csdn.net/y_k_y/article/details/81350274
+centos7中安装RabbitMQ
+1.安装Erlang
+1.1下载rpm包
+#wget https://packages.erlang-solutions.com/erlang-solutions-1.0-1.noarch.rpm
+ 
+从erlang-solutions中更新该包，并将erlang_solutions.repo添加到/etc/yum.repos.d
+#rpm -Uvh erlang-solutions-1.0-1.noarch.rpm
+ 
+1.2安装
+#yum install erlang
+----------------------------------------------------------------
+该包还需依赖到epel源，请确保已有该源,若没有则可通过以下方式安装：
+#wget http://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+#rpm -ivh epel-release-latest-7.noarch.rpm
+#yum repolist 
+
+1.3验证Erlang是否安装成功
+入erl，如果出现下面的内容，表示安装成功：
+	Erlang/OTP 20 [erts-9.1] [source] [64-bit] [smp:1:1] [ds:1:1:10] [async-threads:10] [hipe] [kernel-poll:false]
+	Eshell V9.1 (abort with ^G)
+	1>
+----------------------------------------------------------------
+由于Erlang Solutions会进行不断地更新，且RabbitMQ对Erlang的版本有一定的要求（官方版本要求对应表）。
+所以官方建议我们禁止Erlang版本的自动更新。方法如下：参考如何禁止某个软件包的自动升级	
+1.4安装yum-versionlock
+#yum install yum-plugin-versionlock
+1.5禁止Erlang自动更新
+#yum versionlock erlang
+----------------------------------------------------------------
+注：默认情况下，yum似乎是不会自动更新软件的，除非安装了yum-cron这个软件或者自己写了某些自动更新脚本。
+如果是前者的话，我们也可以 cd /etc/yum 目录下，将yum-cron.conf中的download_updates = yes 改为 no。
+
+
+2.完成后安装RabbitMQ：
+rabbitmq-server-generic-unix-3.7.8.tar.xz
+#wget https://dl.bintray.com/rabbitmq/all/rabbitmq-server/3.7.8/rabbitmq-server-generic-unix-3.7.8.tar.xz
+#xz -d rabbitmq-server-generic-unix-3.7.8.tar.xz
+#tar -xvf rabbitmq-server-generic-unix-3.7.8.tar
+
+3.修改profile
+#vim /etc/profile
+		在最下面添加：export PATH=$PATH:/root/rabbitmq_server-3.7.8/sbin
+#source /etc/profile
+
+4.开启管理后台 
+sbin目录下
+rabbitmq-plugins enable rabbitmq_management
+
+# 开放端口
+firewall-cmd --add-port=15672/tcp --permanent
+firewall-cmd --reload
+
+5.完成后启动服务：
+cd /root/rabbitmq_server-3.7.8/sbin
+rabbitmq-server -detached
+
+# 添加用户
+rabbitmqctl add_user 用户名 密码
+
+# 赋予用户管理员角色
+rabbitmqctl set_user_tags 用户 administrator
+
+
+https://www.cnblogs.com/edward2013/p/5061511.html
+
+
+
